@@ -48,6 +48,14 @@ void setup() {
     while (1);
   }
   Serial.println("initialization done.");
+  Serial.println("");
+  Serial.println("Please enter your character");
+  Serial.println("");
+  Serial.println("METROID");
+  Serial.println("");
+  Serial.println("LINK");
+  Serial.println("");
+  Serial.println("WALUIGI");  
   
 
 
@@ -56,25 +64,56 @@ void setup() {
 void loop() {
   if(Serial.available()>0){
   x = Serial.read();
-  Serial.println(x);
   }
   if(x==77){
     // re-open the file for reading:
     myFile = SD.open("METROID.txt");
     if (myFile) {
       Serial.println("Archivo:");
-
-    // read from the file until there's nothing else in it:
+      // read from the file until there's nothing else in it:
       while (myFile.available()) {
         Serial.write(myFile.read());
-    }
-    // close the file:
-    myFile.close();
+      }
+      // close the file:
+      myFile.close();
     } 
     else {
-    // if the file didn't open, print an error:
+      // if the file didn't open, print an error:
       Serial.println("error opening test.txt");
+    }
   }
+  if(x==78){
+    // re-open the file for reading:
+    myFile = SD.open("LINK.txt");
+    if (myFile) {
+      Serial.println("Archivo:");
+      // read from the file until there's nothing else in it:
+      while (myFile.available()) {
+        Serial.write(myFile.read());
+      }
+      // close the file:
+      myFile.close();
+    } 
+    else {
+      // if the file didn't open, print an error:
+      Serial.println("error opening test.txt");
+    }
   }
-  // nothing happens after setup
+  if(x==87){
+    // re-open the file for reading:
+    myFile = SD.open("WALUIGI.txt");
+    if (myFile) {
+      Serial.println("Archivo:");
+      // read from the file until there's nothing else in it:
+      while (myFile.available()) {
+        Serial.write(myFile.read());
+      }
+      // close the file:
+      myFile.close();
+    } 
+    else {
+      // if the file didn't open, print an error:
+      Serial.println("error opening test.txt");
+    }
+  }
 }
