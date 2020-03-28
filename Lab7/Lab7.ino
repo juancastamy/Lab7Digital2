@@ -32,7 +32,7 @@
 #include <SD.h>
 
 File myFile;
-int x = 0;
+String x = "";
 void setup() {
   // Open serial communications and wait for port to open:
   Serial.begin(9600);
@@ -51,21 +51,32 @@ void setup() {
   Serial.println("");
   Serial.println("Please enter your character");
   Serial.println("");
-  Serial.println("METROID");
+  Serial.println("-METROID");
   Serial.println("");
-  Serial.println("LINK");
+  Serial.println("-LINK");
   Serial.println("");
-  Serial.println("WALUIGI");  
+  Serial.println("-WALUIGI");  
+  Serial.println("");
+  Serial.println("or END to finish");  
   
 
 
 }
 
 void loop() {
-  if(Serial.available()>0){
-  x = Serial.read();
-  }
-  if(x==77){
+  //OBTENIDO CODIGO PARA LEER CADENAS DE https://www.luisllamas.es/cadenas-de-texto-puerto-serie-arduino/
+  while (Serial.available()){
+      char character = Serial.read();//guarda lo que se lee del puerto 
+      if (character != '\n') // si character no es igual a nada
+      {
+         x.concat(character); //concatena los valores de character en una cadena
+      }
+       else
+      {
+         x = "";
+      }
+   }
+  if(x=="METROID"){
     // re-open the file for reading:
     myFile = SD.open("METROID.txt");
     if (myFile) {
@@ -76,13 +87,23 @@ void loop() {
       }
       // close the file:
       myFile.close();
+      Serial.println("");
+      Serial.println("Please renter your character");
+      Serial.println("");
+      Serial.println("-METROID");
+      Serial.println("");
+      Serial.println("-LINK");
+      Serial.println("");
+      Serial.println("-WALUIGI");
+      Serial.println("");
+      Serial.println("or END to finish"); 
     } 
     else {
       // if the file didn't open, print an error:
       Serial.println("error opening test.txt");
     }
   }
-  if(x==78){
+  if(x=="LINK"){
     // re-open the file for reading:
     myFile = SD.open("LINK.txt");
     if (myFile) {
@@ -93,13 +114,24 @@ void loop() {
       }
       // close the file:
       myFile.close();
+      Serial.println("");
+      Serial.println("Please renter your character");
+      Serial.println("");
+      Serial.println("-METROID");
+      Serial.println("");
+      Serial.println("-LINK");
+      Serial.println("");
+      Serial.println("-WALUIGI");
+      Serial.println("");
+      Serial.println("or END to finish"); 
     } 
     else {
       // if the file didn't open, print an error:
       Serial.println("error opening test.txt");
     }
   }
-  if(x==87){
+
+  if(x== "WALUIGI"){
     // re-open the file for reading:
     myFile = SD.open("WALUIGI.txt");
     if (myFile) {
@@ -110,10 +142,24 @@ void loop() {
       }
       // close the file:
       myFile.close();
+      Serial.println("");
+      Serial.println("Please renter your character");
+      Serial.println("");
+      Serial.println("-METROID");
+      Serial.println("");
+      Serial.println("-LINK");
+      Serial.println("");
+      Serial.println("-WALUIGI");
+      Serial.println("");
+      Serial.println("or END to finish"); 
     } 
     else {
       // if the file didn't open, print an error:
       Serial.println("error opening test.txt");
     }
+  }
+  if(x=="END"){
+  Serial.println("Have a good afternoon. Bye");
+  Serial.end();
   }
 }
